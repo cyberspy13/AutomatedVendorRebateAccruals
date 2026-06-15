@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "My Server",
+            "request": "launch",
+            "type": "al",
+            "server": "http://bc27server/BC/",
+            "serverInstance": "BC",
+            "authentication": "UserPassword",
+            "breakOnError": "All",
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true,
+            "tenant": "default",
+            "usePublicURLFromServer": true,
+            "schemaUpdateMode":"ForceSync",
+            "debugServer": 4711
+        }
+    ]
+}

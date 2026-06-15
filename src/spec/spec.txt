@@ -1,0 +1,13 @@
+Epic: Automated Vendor Rebate Accruals
+
+Background: Many enterprise clients receive retroactive rebates from their vendors based on purchasing volume (e.g., "If you buy £100,000 of stock this quarter, we will give you a 2% rebate"). Currently, the finance team has no visibility into these expected rebates until the vendor sends a Credit Memo months later.
+
+Objective: Architect an extension that automatically calculates and posts accrued rebate values to the General Ledger at the exact moment a Purchase Invoice is posted.
+
+Sprint Backlog & User Stories
+Story 1: Rebate Setup. As a Finance Controller, I need to define rebate percentages per Vendor and Item Category, so the system knows when to trigger an accrual.
+
+Story 2: Automated Accrual Posting. As an Accounts Payable Clerk, when I post a Purchase Invoice, I want the system to silently calculate any applicable rebates and post the accrued value to specific G/L Accounts, separating it from the standard inventory cost.
+
+Story 3: Rebate Ledger. As an Auditor, I need a dedicated "Rebate Ledger Entry" to track exactly which posted invoices generated which accrual amounts.
+

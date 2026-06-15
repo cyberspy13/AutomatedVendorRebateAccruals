@@ -1,0 +1,32 @@
+{
+  "id": "913eade4-e8d9-40ff-8992-dd77a19da875",
+  "name": "AutomatedVendorRebateAccruals",
+  "publisher": "NAVI Publisher",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "27.0.0.0",
+  "idRanges": [
+    {
+      "from": 53000,
+      "to": 53999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "17.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
