@@ -10,7 +10,7 @@ pageextension 53002 "NAVI_PretedPurchaseInvoice " extends "Posted Purchase Invoi
                 ApplicationArea = All;
                 Image = Entries;
                 RunObject = PAGE NAVI_VendorRebateLedgerEntry;
-                RunPageLink = "Vendor No." = field("No.");
+                RunPageLink = "Vendor No." = field("Buy-from Vendor No.");
             }
         }
     }
