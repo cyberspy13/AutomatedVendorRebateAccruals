@@ -8,7 +8,8 @@ table 53000 NAVI_VendorRebateSetup
         field(1; "Vendor No."; Code[20])
         {
             Caption = 'Vendor No.';
-            TableRelation = Vendor;
+            TableRelation = Vendor where("Enable Auto-Rebates" = const(true));
+            /*
             trigger OnValidate()
             var
                 Lrec_Vend: record Vendor;
@@ -19,6 +20,7 @@ table 53000 NAVI_VendorRebateSetup
                     Error(Ltxt_AutoRebError)
                 end;
             end;
+            */
         }
         field(2; "Item Category Code"; Code[20])
         {

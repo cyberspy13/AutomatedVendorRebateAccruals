@@ -9,30 +9,43 @@ tableextension 53003 NAVI_PurchaseLine extends "Purchase Line"
         modify("No.")
         {
             trigger OnAfterValidate()
-            var
-                Lrec_VendorRebateSetup: record NAVI_VendorRebateSetup;
-                Ldec_RebateValue: Decimal;
-                Lrec_PurchaseHeader: record "Purchase Header";
-                Lrec_PurchaseLine: record "Purchase Line";
-                Lrec_Item: record Item;
-                Lrec_ItemCatCode: Code[20];
             begin
-                //Lrec_PurchaseLine.SetRange("Document Type", Rec."Document Type");
-                // Lrec_PurchaseLine.SetRange("Document No.", Rec."Document No.");
-                // if Lrec_PurchaseLine.FindFirst() then begin
-                //   repeat
-                // Lrec_VendorRebateSetup.get(Lrec_PurchaseLine."Buy-from Vendor Name");
-                Lrec_Item.Get(Rec."No.");
-                Lrec_ItemCatCode := Lrec_Item."Item Category Code";
-                Lrec_VendorRebateSetup.Get(Rec."Buy-from Vendor No.", Lrec_ItemCatCode);
-                if Lrec_VendorRebateSetup.IsEmpty then
-                    exit else
-                    Ldec_RebateValue := (Rec."Line Amount" * Lrec_VendorRebateSetup."Rebate %") / 100;
-                Rec."Accured Rebate Amount" := Ldec_RebateValue;
-                // until Lrec_PurchaseLine.Next() = 0;
-                // end;
+                CalculateRebate();
+            end;
+        }
+        modify(Quantity)
+        {
+            trigger OnAfterValidate()
+            begin
+                CalculateRebate();
+            end;
+        }
+        modify("Direct Unit Cost")
+        {
+            trigger OnAfterValidate()
+            begin
+                CalculateRebate();
             end;
         }
     }
+    local procedure CalculateRebate()
+    var
+        Lrec_VendorRebateSetup: record NAVI_VendorRebateSetup;
+        Lrec_Item: record Item;
+        Lrec_ItemCatCode: Code[20];
+        test: codeunit 90;
+    begin
+        if Rec.Type <> Rec.Type::Item then
+            exit;
 
+        if Lrec_Item.Get(Rec."No.") then
+            Lrec_ItemCatCode := Lrec_Item."Item Category Code";
+
+        if Lrec_VendorRebateSetup.Get(Rec."Buy-from Vendor No.", Lrec_ItemCatCode) then
+        begin
+            Rec."Accured Rebate Amount" := (Rec."Line Amount" * Lrec_VendorRebateSetup."Rebate %") / 100;
+        end else begin
+            Rec."Accured Rebate Amount" := 0;
+        end;
+    end;
 }
