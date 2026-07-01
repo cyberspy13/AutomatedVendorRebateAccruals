@@ -27,13 +27,33 @@ tableextension 53003 NAVI_PurchaseLine extends "Purchase Line"
                 CalculateRebate();
             end;
         }
+        modify("Line Discount %")
+        {
+            trigger OnAfterValidate()
+            begin
+                CalculateRebate();
+            end;
+        }
+        modify("Line Discount Amount")
+        {
+            trigger OnAfterValidate()
+            begin
+                CalculateRebate();
+            end;
+        }
+        modify("Line Amount")
+        {
+            trigger OnAfterValidate()
+            begin
+                CalculateRebate();
+            end;
+        }
     }
     local procedure CalculateRebate()
     var
         Lrec_VendorRebateSetup: record NAVI_VendorRebateSetup;
         Lrec_Item: record Item;
         Lrec_ItemCatCode: Code[20];
-        test: codeunit 90;
     begin
         if Rec.Type <> Rec.Type::Item then
             exit;
@@ -43,7 +63,7 @@ tableextension 53003 NAVI_PurchaseLine extends "Purchase Line"
 
         if Lrec_VendorRebateSetup.Get(Rec."Buy-from Vendor No.", Lrec_ItemCatCode) then
         begin
-            Rec."Accured Rebate Amount" := (Rec."Line Amount" * Lrec_VendorRebateSetup."Rebate %") / 100;
+            Rec."Accured Rebate Amount" := Round((Rec."Line Amount" * Lrec_VendorRebateSetup."Rebate %") / 100);
         end else begin
             Rec."Accured Rebate Amount" := 0;
         end;

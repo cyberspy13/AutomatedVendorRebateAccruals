@@ -8,8 +8,8 @@ table 53001 NAVI_VendorRebateLedgerEntry
         field(1; "Entry No."; Integer)
         {
             Caption = 'Entry No.';
-            AutoIncrement = true;
             Editable = false;
+            Autoincrement = true;
         }
         field(2; "Posting Date"; Date)
         {
