@@ -47,6 +47,8 @@ codeunit 53001 NAVIPurchaseOrderAndInvoice
             exit;
 
         GenJnlLine.Init();
+        GenJnlLine."Journal Template Name" := 'GENERAL';
+        GenJnlLine."Journal Batch Name" := 'DAILY';
         GenJnlLine."Posting Date" := PstdPurchaseInvLine."Posting Date";
         GenJnlLine."Document No." := PstdPurchaseInvLine."Document No.";
         GenJnlLine."Account Type" := GenJnlLine."Account Type"::"G/L Account";
